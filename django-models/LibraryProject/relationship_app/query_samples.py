@@ -28,8 +28,9 @@ except Author.DoesNotExist:
     print("Author 'Chinua Achebe' not found.")
 
 # 2. List all books in a specific library
+library_name = "Central Library"
 try:
-    library = Library.objects.get(name="Central Library")
+    library = Library.objects.get(name="library_name")
     books = library.books.all()
     print(f"\nBooks in {library.name}:")
     for book in books:
