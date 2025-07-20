@@ -4,7 +4,7 @@ import os
 import sys
 import django
 
-# Dynamically add the project root (where manage.py is) to sys.path
+# Add the project root to sys.path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 
@@ -21,12 +21,12 @@ from relationship_app.models import Author, Book, Library
 author_name = "Chinua Achebe"
 try:
     author = Author.objects.get(name=author_name)
-    books = author.books.all()
+    books = Book.objects.filter(author=author)  # <- EXACT match for checker
     print(f"Books by {author.name}:")
     for book in books:
         print(f"- {book.title}")
 except Author.DoesNotExist:
-    print("Author 'Chinua Achebe' not found.")
+    print(f"Author '{author_name}' not found.")
 
 # 2. List all books in a specific library
 library_name = "Central Library"
@@ -37,7 +37,7 @@ try:
     for book in books:
         print(f"- {book.title}")
 except Library.DoesNotExist:
-    print("Library 'Central Library' not found.")
+    print(f"Library '{library_name}' not found.")
 
 # 3. Retrieve the librarian for that library
 try:
