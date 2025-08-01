@@ -148,6 +148,8 @@ X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking by disallowing iframes
 SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent MIME type sniffing
 SECURE_BROWSER_XSS_FILTER = True  # Enable basic browser XSS filtering (legacy)
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 # Content Security Policy (already included via csp app)
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_SCRIPT_SRC = ("'self'",)
