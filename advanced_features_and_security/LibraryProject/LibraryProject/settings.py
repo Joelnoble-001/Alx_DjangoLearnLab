@@ -130,17 +130,25 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'login'
 
-# Security-related headers
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
 
-# Secure cookies
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
+# Security settings
 
+# HTTPS and HSTS
+SECURE_SSL_REDIRECT = True  # Redirect all HTTP requests to HTTPS
+SECURE_HSTS_SECONDS = 31536000  # Tell browsers to use HTTPS for 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Apply HSTS to all subdomains
+SECURE_HSTS_PRELOAD = True  # Allow domain to be preloaded by browsers
 
-# Example CSP policy
+# Secure Cookies
+SESSION_COOKIE_SECURE = True  # Ensure session cookies are sent only over HTTPS
+CSRF_COOKIE_SECURE = True     # Ensure CSRF cookies are sent only over HTTPS
+
+# Secure Headers
+X_FRAME_OPTIONS = 'DENY'  # Prevent clickjacking by disallowing iframes
+SECURE_CONTENT_TYPE_NOSNIFF = True  # Prevent MIME type sniffing
+SECURE_BROWSER_XSS_FILTER = True  # Enable basic browser XSS filtering (legacy)
+
+# Content Security Policy (already included via csp app)
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_SCRIPT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'",)
