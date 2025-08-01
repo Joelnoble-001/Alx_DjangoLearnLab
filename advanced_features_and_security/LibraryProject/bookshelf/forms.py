@@ -8,3 +8,7 @@ class BookForm(forms.ModelForm):
 
 class BookSearchForm(forms.Form):
     q = forms.CharField(max_length=100, required=False)
+
+class ExampleForm(forms.Form):
+    title = forms.CharField(max_length=100, required=True)
+    author = forms.CharField(max_length=100, required=True)
