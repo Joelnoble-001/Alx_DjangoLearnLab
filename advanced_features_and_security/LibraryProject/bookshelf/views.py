@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import permission_required, login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.csrf import csrf_protect
 from .models import Book
-from .forms import BookForm, BookSearchForm, ExampleForm 
+from .forms import BookForm, BookSearchForm
+from .forms import ExampleForm
 # Create your views here.
 
 # can view
