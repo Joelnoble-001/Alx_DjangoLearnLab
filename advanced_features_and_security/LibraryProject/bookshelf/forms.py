@@ -5,3 +5,6 @@ class BookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = '__all__'
+
+class BookSearchForm(forms.Form):
+    q = forms.CharField(max_length=100, required=False)

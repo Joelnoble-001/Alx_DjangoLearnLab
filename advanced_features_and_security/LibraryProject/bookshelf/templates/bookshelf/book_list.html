@@ -1,0 +1,14 @@
+<form method="get" action=".">
+    {% csrf_token %}
+    {{ form.q.label_tag }} {{ form.q }}
+    <input type="submit" value="Search">
+</form>
+
+<h2>Book List</h2>
+<ul>
+    {% for book in books %}
+        <li>{{ book.title }}</li>
+    {% empty %}
+        <li>No books found.</li>
+    {% endfor %}
+</ul>
