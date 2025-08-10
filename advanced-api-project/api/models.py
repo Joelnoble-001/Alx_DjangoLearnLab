@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils import timezone
 
-# Create your models here.
-
 # Author model to represent a writer
 class Author(models.Model):
     # Name of the author
@@ -23,3 +21,5 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+# Create your models here.
