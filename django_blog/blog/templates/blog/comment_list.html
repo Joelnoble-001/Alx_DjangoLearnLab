@@ -1,0 +1,27 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+  <h2>Comments for {{ comments.first.post.title }}</h2>
+
+  <div>
+    {% for comment in comments %}
+      <blockquote>
+        <p>{{ comment.content }}</p>
+        <footer>
+          <strong>{{ comment.author }}</strong> 
+          — {{ comment.created_at|date:"M d, Y H:i" }}
+        </footer>
+      </blockquote>
+
+      {% if user == comment.author %}
+        <p>
+          <a href="{% url 'comment-update' comment.id %}">Edit</a> |
+          <a href="{% url 'comment-delete' comment.id %}">Delete</a>
+        </p>
+      {% endif %}
+      <hr>
+    {% empty %}
+      <p>No comments yet.</p>
+    {% endfor %}
+  </div>
+{% endblock %}
