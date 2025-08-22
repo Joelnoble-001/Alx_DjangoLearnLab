@@ -1,0 +1,8 @@
+<h2>{{ object.title }}</h2>
+<p>{{ object.content }}</p>
+<p><small>by {{ object.author }}</small></p>
+
+{% if user.is_authenticated and user == object.author %}
+  <a href="{% url 'post-update' object.pk %}">Edit</a> |
+  <a href="{% url 'post-delete' object.pk %}">Delete</a>
+{% endif %}
