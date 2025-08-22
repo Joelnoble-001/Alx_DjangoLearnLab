@@ -14,6 +14,12 @@
       <a href="{% url 'blog:login' %}">Login</a>
       <a href="{% url 'blog:register' %}">Register</a>
     {% endif %}
+
+    <!-- Search form -->
+    <form method="get" action="{% url 'blog:search_posts' %}" style="display:inline;">
+      <input type="text" name="q" placeholder="Search posts...">
+      <button type="submit">Search</button>
+    </form>
   </nav>
 
   {% if messages %}
