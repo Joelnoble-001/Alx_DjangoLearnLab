@@ -6,7 +6,14 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     bio = models.TextField(blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profiles/', blank=True, null=True)
-    followers = models.ManyToManyField('self', symmetrical=False, related_name='following', blank=True)
+
+    # Self-referential many-to-many for following
+    following = models.ManyToManyField(
+        "self",
+        symmetrical=False,
+        related_name="followers",
+        blank=True,
+    )
 
     def __str__(self):
         return self.username
