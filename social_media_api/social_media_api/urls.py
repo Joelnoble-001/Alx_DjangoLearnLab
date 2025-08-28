@@ -17,6 +17,20 @@ Including another URLconf
 # social_media_api/urls.py
 from django.contrib import admin
 from django.urls import path, include
+from django.http import JsonResponse
+
+def api_root(request):
+    return JsonResponse({
+        "api_name": "Social Media API",
+        "version": "1.0",
+        "status": "running",
+        "routes": {
+            "posts": "/api/posts/",
+            "accounts": "/api/accounts/",
+        },
+        "documentation": "https://your-docs-url.com"  # optional if you have docs
+    })
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
