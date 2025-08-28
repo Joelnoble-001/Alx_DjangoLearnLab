@@ -25,7 +25,7 @@ load_dotenv()  # load .env locally
 
 # SECURITY
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-secret-key")  # fallback for dev
-DEBUG = os.getenv("DJANGO_DEBUG", "False") == "True"
+DEBUG = False
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 # Security settings (only applied in production)
