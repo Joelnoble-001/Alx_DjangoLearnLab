@@ -25,7 +25,7 @@ load_dotenv()  # load .env locally
 
 # SECURITY
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-secret-key")  # fallback for dev
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 SECURE_BROWSER_XSS_FILTER = True
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'corsheaders',  # if using CORS
     'accounts',
     'posts',
+    'notifications',
     
 ]
 
@@ -106,29 +107,25 @@ WSGI_APPLICATION = 'social_media_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+if os.getenv("DATABASE_URL"):
+    # Production / Render.com PostgreSQL
+    DATABASES = {
+        "default": dj_database_url.parse(
+            os.getenv("DATABASE_URL"),
+            conn_max_age=600,
+            ssl_require=not DEBUG  # force SSL in production
+        )
     }
-}
+else:
+    # Local development fallback to SQLite
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
-
-# Use DATABASE_URL if provided (e.g. on Render.com) or fallback to SQLite for local dev
-DATABASES = {
-    "default": dj_database_url.parse(
-        os.getenv("DATABASE_URL", f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
-        conn_max_age=600,
-        ssl_require=not DEBUG,  # force SSL to Postgres in production
-    )
-}
-
-
-AUTH_USER_MODEL = 'accounts.User'  # use custom user model
+AUTH_USER_MODEL = 'accounts.CustomUser'  # use custom user model
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

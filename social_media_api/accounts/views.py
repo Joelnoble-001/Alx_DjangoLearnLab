@@ -3,13 +3,11 @@ from rest_framework import generics, status, permissions
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
-from .models import User, CustomUser
-from .serializers import RegisterSerializer, LoginSerializer, UserSerializer
+from .models import CustomUser
+from .serializers import RegisterSerializer, LoginSerializer, UserSerializer 
 from django.contrib.auth import get_user_model
 from rest_framework.decorators import api_view, permission_classes
 from django.shortcuts import get_object_or_404
-from .models import Post
-from .serializers import PostSerializer
 
 
 User = get_user_model()
