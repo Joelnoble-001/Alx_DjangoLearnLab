@@ -25,7 +25,7 @@ load_dotenv()  # load .env locally
 
 # SECURITY
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "unsafe-secret-key")  # fallback for dev
-DEBUG = True if os.getenv("DEBUG", "True") == "True" else False
+DEBUG = False if os.getenv("DJANGO_DEBUG") == "False" else True
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
 
 SECURE_BROWSER_XSS_FILTER = True
